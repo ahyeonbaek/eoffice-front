@@ -71,13 +71,15 @@ ul {
 .input_wrap {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 2rem;
 }
 
 .label {
   font-size: 2rem;
   font-weight: bold;
- 
+  flex-basis: 12rem;
+  text-align: right;
 }
 
 .input {

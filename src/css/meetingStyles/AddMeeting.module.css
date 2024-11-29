@@ -1,0 +1,42 @@
+
+
+.addmeeting_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.addmeeting_default_img{
+    width: 20rem;
+}
+
+.addmeeting_input_file{
+    display: none;
+}
+
+.addmeeting_input_box{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-left: 50px;
+}
+
+.addmeeting_input_name_box{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.addmeeting_input_label{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.addmeeting_input{
+    border:none;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    height: 40px;
+    width: 280px;
+}

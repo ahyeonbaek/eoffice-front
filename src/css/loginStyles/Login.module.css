@@ -1,189 +1,189 @@
 .loginContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    min-width: 900px;
-    background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 900px;
+  background-color: #f9f9f9;
 }
 
 .header {
-    background-color: #f4f4f4;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 900px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f4f4f4;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 900px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logoText {
-    font-size: 30px;
-    color: #6a0dad;
-    font-weight: bold;
-    padding: 10px 0;
+  font-size: 30px;
+  color: #6a0dad;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 .userIcon {
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
-    border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 50%;
 }
 
 .mainContent {
-    display: flex;
-    flex: 1;
-    background-color: white;
+  display: flex;
+  flex: 1;
+  background-color: white;
 }
 
 .leftSection {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #6700E6;
-    color: white;
-    padding: 20px;
-    min-width: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #6700e6;
+  color: white;
+  padding: 20px;
+  min-width: 300px;
 }
 
 .leftSection .image {
-    max-width: 60%;
-    height: auto;
-    margin-bottom: 30px;
+  max-width: 60%;
+  height: auto;
+  margin-bottom: 30px;
 }
 
 .signupButton {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: white;
-    color: #6700E6;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  color: #6700e6;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .signupButton:hover {
-    background-color: #260054;
-    color: white;
+  background-color: #260054;
+  color: white;
 }
 
 .rightSection {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 60px;
-    min-width: 600px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  min-width: 600px;
 }
 
 .inputField {
-    margin-bottom: 30px;
-    width: 100%;
-    max-width: 400px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .inputRow {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .inputLabel {
-    flex: 1;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    text-align: right;
-    margin-right: 20px;
+  flex: 1;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: right;
+  margin-right: 20px;
 }
 
 .input {
-    flex: 2;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s;
+  flex: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
 .input:focus {
-    border-color: #6700E6;
+  border-color: #6700e6;
 }
 
 .oauthButtons {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    width: 100%;
-    max-width: 350px;
-    gap: 15px; 
-    margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 350px;
+  gap: 15px;
+  margin-left: 50px;
 }
 
 .button {
-    width: 300px;
-    height: 50px;
-    border: none;
-    border-radius: 20px;
-    font-size: 25px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  width: 300px;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .button:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 .emailButton {
-    width: 100%;
-    background-color: #6700E6;
-    color: white;
+  width: 100%;
+  background-color: #6700e6;
+  color: white;
 }
 
 .emailButton:hover {
-    background-color: #260054;
+  background-color: #260054;
 }
 
-.googleButton, .kakaoButton {
-    width: 100%; 
-    height: 50px;
-    background-size: cover;
-    background-position: 0%;
+.googleButton,
+.kakaoButton {
+  width: 100%;
+  height: 50px;
+  background-size: cover;
+  background-position: 0%;
 }
 
 .googleButton {
-    background-image: url("/images/google_login_img.png");
+    background-image: url("../../../public/images/google_login_img.png");
 }
 
-
 .kakaoButton {
-    background-image: url("/images/kakao_login_img.png");
+    background-image: url("../../../public/images/kakao_login_img.png");
 }
 
 .buttonImage {
-    width: 200px;
-    height: auto;
-    margin-right: 10px;
+  width: 200px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .footer {
-    width: 100%;
-    height: 30px;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
-    position: absolute;
-    bottom: 0;
-    min-width: 900px;
+  width: 100%;
+  height: 30px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+  min-width: 900px;
 }

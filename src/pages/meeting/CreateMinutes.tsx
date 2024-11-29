@@ -10,6 +10,7 @@ const CreateMinutes = () => {
   const [meetingInput, setMeetingInput] = useState({
     meetingTitle: '',
     meetingDate: '',
+    meetingAttendee: 0,
     meetingContent: '',
   });
 
@@ -17,6 +18,15 @@ const CreateMinutes = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+
+    if (e.target.type === 'number') {
+      const filterZero = e.target.value.toString();
+
+      if (filterZero[0] === '0') {
+        return;
+      }
+    }
+
     setMeetingInput((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -26,6 +36,9 @@ const CreateMinutes = () => {
       return;
     } else if (meetingInput.meetingDate === '') {
       alert('일시를 입력해주세요.');
+      return;
+    } else if (meetingInput.meetingAttendee === null) {
+      alert('참가자 수를 입력해주세요.');
       return;
     } else if (meetingInput.meetingContent === '') {
       alert('회의내용을 입력해주세요.');
@@ -40,7 +53,7 @@ const CreateMinutes = () => {
           body: JSON.stringify({
             title: meetingInput.meetingTitle,
             date: meetingInput.meetingDate,
-            attendees: '',
+            attendees: meetingInput.meetingAttendee,
             content: meetingInput.meetingContent,
           }),
         });
@@ -71,51 +84,70 @@ const CreateMinutes = () => {
           <Header />
           <main className={styles.main}>
             <div className={styles.main_content}>
-              <div>
-                <label htmlFor="meetingTitle">회의제목</label>
-                <input
-                  type="text"
-                  id="meetingTitle"
-                  name="meetingTitle"
-                  value={meetingInput.meetingTitle}
-                  onChange={handleOnChangeInput}
-                />
-              </div>
-              <div>
-                <label htmlFor="meetingDate">일시</label>
-                <input
-                  type="date"
-                  id="meetingDate"
-                  name="meetingDate"
-                  value={meetingInput.meetingDate}
-                  onChange={handleOnChangeInput}
-                />
-              </div>
-              <div>
-                <label htmlFor="meetingAttendee">참여자</label>
-                <input
-                  type="text"
-                  id="meetingAttendee"
-                  name="meetingAttendee"
-                  value={''}
-                  onChange={() => {}}
-                />
+              <div className={styles.inputs_wrap}>
+                <div className={styles.input_wrap}>
+                  <label className={styles.label} htmlFor="meetingTitle">
+                    회의제목
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="meetingTitle"
+                    name="meetingTitle"
+                    value={meetingInput.meetingTitle}
+                    onChange={handleOnChangeInput}
+                  />
+                </div>
+                <div className={styles.input_wrap}>
+                  <label className={styles.label} htmlFor="meetingDate">
+                    일시
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="date"
+                    id="meetingDate"
+                    name="meetingDate"
+                    value={meetingInput.meetingDate}
+                    onChange={handleOnChangeInput}
+                  />
+                </div>
+                <div className={styles.input_wrap}>
+                  <label className={styles.label} htmlFor="meetingAttendee">
+                    참여자
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="number"
+                    id="meetingAttendee"
+                    name="meetingAttendee"
+                    value={meetingInput.meetingAttendee}
+                    onChange={handleOnChangeInput}
+                  />
+                </div>
 
-                <button onClick={() => {}}>추가</button>
+                <div className={styles.input_wrap}>
+                  <label className={styles.label} htmlFor="meetingContent">
+                    회의 내용
+                  </label>
 
-                <ul>{}</ul>
-              </div>
-              <div>
-                <label htmlFor="meetingContent">회의 내용</label>
-                <textarea
-                  name="meetingContent"
-                  id="meetingContent"
-                  value={meetingInput.meetingContent}
-                  onChange={handleOnChangeInput}
-                ></textarea>
+                  <textarea
+                    className={styles.textarea}
+                    name="meetingContent"
+                    id="meetingContent"
+                    value={meetingInput.meetingContent}
+                    onChange={handleOnChangeInput}
+                  ></textarea>
+                </div>
               </div>
 
-              <button onClick={handleSubmitMeetingData}>작성완료</button>
+              {JSON.stringify(meetingInput)}
+
+              <button
+                className={styles.button}
+                onClick={handleSubmitMeetingData}
+              >
+                작성완료
+              </button>
             </div>
           </main>
           <Footer />

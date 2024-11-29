@@ -1,8 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../css/loginStyles/Signup.module.css';
-import Footer from '../../components/footer/Footer';
-import Header from '../../components/header/Header';
 
 function Signup() {
   const [userDetails, setUserDetails] = useState({
@@ -44,7 +42,7 @@ function Signup() {
         console.log('회원가입 성공:', data);
         navigate('/login');
       } else {
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         if (errorData.message === '이미 존재하는 이메일입니다.') {
           alert('이미 사용 중인 이메일입니다. 다른 이메일을 사용하세요.');
         } else {
@@ -55,44 +53,82 @@ function Signup() {
     } catch (err) {
       console.error('회원가입 중 오류 발생:', err);
     }
-};
+  };
 
   const navigateToLogin = () => {
-      navigate('/login');
+    navigate('/login');
   };
 
   return (
-      <div className={styles.signupContainer}>
-          {/* <Header /> */}
-          <div className={styles.mainContent}>
-            <div className={styles.leftSection}>
-              <div className={styles.inputField}>
-                <div className={styles.inputRow}>
-                  <label className={styles.inputLabel}>이름</label>
-                   <input type="text" name="name" value={userDetails.name} onChange={handleInputChange} className={styles.input} placeholder="이름 입력" />
-                </div>
-                <div className={styles.inputRow}>
-                  <label className={styles.inputLabel}>이메일</label>
-                  <input type="email" name="email" value={userDetails.email} onChange={handleInputChange} className={styles.input} placeholder="이메일 입력" />
-                </div>
-                <div className={styles.inputRow}>
-                  <label className={styles.inputLabel}>비밀번호</label>
-                  <input type="password"  name="password" value={userDetails.password} onChange={handleInputChange} className={styles.input} placeholder="비밀번호 입력" />
-                </div>
-                <div className={styles.inputRow}>
-                  <label className={styles.inputLabel}>비밀번호 확인</label>
-                  <input type="password" name="confirmPassword" value={userDetails.confirmPassword} onChange={handleInputChange} className={styles.input} placeholder="비밀번호 확인" />
-                </div>
-              </div>
-                <button onClick={handleSignup} className={styles.signupButton}>회원가입</button>
-              </div>
-              <div className={styles.rightSection}>
-                <img src="../../../public/images/computerImage.png" className={styles.image} alt="Computer" />
-                <button onClick={navigateToLogin} className={styles.loginButton}>로그인</button>
-              </div>
+    <div className={styles.signupContainer}>
+
+      <div className={styles.mainContent}>
+        <div className={styles.leftSection}>
+          <div className={styles.inputField}>
+            <div className={styles.inputRow}>
+              <label className={styles.inputLabel}>이름</label>
+              <input
+                type="text"
+                name="name"
+                value={userDetails.name}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="이름 입력"
+              />
+            </div>
+            <div className={styles.inputRow}>
+              <label className={styles.inputLabel}>이메일</label>
+              <input
+                type="email"
+                name="email"
+                value={userDetails.email}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="이메일 입력"
+              />
+            </div>
+            <div className={styles.inputRow}>
+              <label className={styles.inputLabel}>비밀번호</label>
+              <input
+                type="password"
+                name="password"
+                value={userDetails.password}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="비밀번호 입력"
+              />
+            </div>
+            <div className={styles.inputRow}>
+              <label className={styles.inputLabel}>비밀번호 확인</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={userDetails.confirmPassword}
+                onChange={handleInputChange}
+                className={styles.input}
+                placeholder="비밀번호 확인"
+              />
+            </div>
           </div>
-          {/* <Footer /> */}
+          <button onClick={handleSignup} className={styles.signupButton}>
+            회원가입
+          </button>
+        </div>
+        <div className={styles.rightSection}>
+          <img
+            src="../../../public/image/computerImage.png"
+            className={styles.image}
+            alt="Computer"
+          />
+          <button onClick={navigateToLogin} className={styles.loginButton}>
+            로그인
+          </button>
+        </div>
       </div>
+      <footer className={styles.footer}>
+        © 2024 E-Office. All Rights Reserved.
+      </footer>
+    </div>
   );
 }
 

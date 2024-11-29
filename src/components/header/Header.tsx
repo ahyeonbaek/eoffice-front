@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 
 import styles from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
-import profileimg from "../../../public/images/profile-img.png";
+import profileimg from "../../../public/images/ix_user-profile-filled.png";
 import guestprofile from "../../../public/images/guest_profile.png";
 
 interface User {
@@ -41,24 +42,26 @@ const Header = () => {
     };
 
     useEffect(() => {
-        fetchUser();
-    },[]);
+    fetchUser();
+    }, []);
+
 
     return(
         <div className={styles.header}>
             {user ? (
                 <div className={styles.header_box1}>
-                    <h1 className={styles.logo}>E-office  </h1>
+                    <a className={styles.logo} onClick={() => navigate('/home')}>E-office </a>
                     <a onClick={() => {navigate('/profile')}}>
                         <img src={profileimg} alt="사용자 프로필 이미지" className={styles.header_profile_img}/>
                     </a>
                 </div>
             ) : <div>
-                    <img src={guestprofile} alt="게스트 프로필 이미지" className={styles.header_profile_img} />
+                   <img src={guestprofile} alt="게스트 프로필 이미지" className={styles.header_profile_img} />
                 </div>
             }
         </div>
-    )
-}
+        )
+
+};
 
 export default Header;
