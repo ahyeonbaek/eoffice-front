@@ -16,12 +16,13 @@ ul {
   display: flex;
   width: 100vw;
   height: 100vh;
+  
 }
 
 .main_container {
   width: 100%;
   height: 100vh;
-
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,12 +38,13 @@ ul {
 .main {
   width: 100%;
   height: 100%;
+  
 }
 
 .main_content {
   min-width: 100rem;
-
-  padding: 5rem 5rem 0rem 26rem;
+  
+  margin-top: 120px;
   gap: 4rem;
 }
 
@@ -51,8 +53,8 @@ ul {
   flex-direction: column;
 
   align-items: center;
-
-  gap: 3rem;
+  margin-left: 200px;
+  gap: 1rem;
   color: #000;
 }
 
@@ -78,16 +80,21 @@ ul {
 }
 
 .minutes_title {
-  flex-basis: 10rem;
+  flex-basis: 15rem;
   color: #6700e6;
 }
 
 .minutes_date {
-  flex-basis: 10rem;
+  flex-basis: 13rem;
   color: #6700e6;
 }
 .minutes_attendee {
   flex-basis: 10rem;
+  color: #6700e6;
+}
+
+.minutes_createAt {
+  flex-basis: 14rem;
   color: #6700e6;
 }
 
@@ -101,11 +108,15 @@ ul {
 
 .minutes_page_wrap {
   display: flex;
-
-  gap: 2rem;
+  gap: 1rem;
+  margin-top: 20px;
 }
 
 .minutes_page {
-  padding: 1rem;
-  color: #6700e6;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: none;
+  background-color: #6700e6;
+  padding: 10px;
+  border-radius: 10px;
 }

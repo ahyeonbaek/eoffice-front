@@ -1,3 +1,5 @@
+
+
 .loginContainer {
   display: flex;
   flex-direction: column;
@@ -85,6 +87,7 @@
   margin-bottom: 30px;
   width: 100%;
   max-width: 400px;
+  padding: 0 30px;
 }
 
 .inputRow {
@@ -116,26 +119,22 @@
   border-color: #6700e6;
 }
 
-.oauthButtons {
+.buttons {
   display: flex;
+  align-items: flex-end;
+  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 350px;
-  gap: 15px;
-  margin-left: 50px;
+  margin-top: 50px;
+  font-family: 'NoonnuBasicGothicRegular';
 }
 
 .button {
-  width: 300px;
+  width: 350px;
   height: 50px;
   border: none;
   border-radius: 20px;
   font-size: 25px;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 
@@ -144,46 +143,29 @@
 }
 
 .emailButton {
-  width: 100%;
   background-color: #6700e6;
   color: white;
+  margin-bottom: 20px;
 }
 
 .emailButton:hover {
   background-color: #260054;
 }
 
-.googleButton,
-.kakaoButton {
-  width: 100%;
+.googleButton {
+  /* width: 100%; */
   height: 50px;
   background-size: cover;
   background-position: 0%;
 }
 
 .googleButton {
-    background-image: url("../../../public/images/google_login_img.png");
+  background-image: url('../../../public/img/google_login_img.png');
 }
 
-.kakaoButton {
-    background-image: url("../../../public/images/kakao_login_img.png");
-}
 
 .buttonImage {
   width: 200px;
   height: auto;
   margin-right: 10px;
-}
-
-.footer {
-  width: 100%;
-  height: 30px;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  min-width: 900px;
 }

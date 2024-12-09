@@ -1,6 +1,12 @@
-import { useState, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from '../../css/loginStyles/Signup.module.css';
+import computerImg from '../../../public/img/computerImage.png';
+import { NavigateButtons } from '../../components/button/Button';
+import InputBox from '../../components/input/InputBox';
+import Input from '../../components/input/Input';
+import Label from '../../components/input/Label';
+
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [userDetails, setUserDetails] = useState({
@@ -9,6 +15,7 @@ function Signup() {
     password: '',
     confirmPassword: '',
   });
+
   const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,11 +23,26 @@ function Signup() {
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSignup = async () => {
-    const { name, email, password, confirmPassword } = userDetails;
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    if (!email || !name || !password || !confirmPassword) {
-      alert('모든 필드를 입력하세요.');
+    const { name, email, password, confirmPassword } = userDetails;
+    const passwordPattern =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    if (!name.trim()) {
+      alert('이름을 입력해주세요.');
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      alert('올바른 이메일 형식을 입력해주세요.');
+      return;
+    }
+
+    if (!passwordPattern.test(password)) {
+      alert('비밀번호는 최소 8자, 문자, 숫자, 특수 문자를 포함해야 합니다.');
       return;
     }
 
@@ -33,13 +55,15 @@ function Signup() {
       const response = await fetch('/api/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({
+          name: userDetails.name,
+          email: userDetails.email,
+          password: userDetails.password,
+        }),
       });
 
       if (response.ok) {
-        const data = await response.json();
         alert('회원가입 성공!');
-        console.log('회원가입 성공:', data);
         navigate('/login');
       } else {
         const errorData = await response.json();
@@ -48,86 +72,86 @@ function Signup() {
         } else {
           alert('회원가입 실패. 다시 시도하세요.');
         }
-        console.error('회원가입 실패:', errorData);
       }
     } catch (err) {
       console.error('회원가입 중 오류 발생:', err);
     }
   };
 
-  const navigateToLogin = () => {
-    navigate('/login');
-  };
+  const navigateToLogin = () => navigate('/login');
 
   return (
     <div className={styles.signupContainer}>
-
       <div className={styles.mainContent}>
-        <div className={styles.leftSection}>
+        <form onSubmit={handleSignup} className={styles.leftSection}>
           <div className={styles.inputField}>
-            <div className={styles.inputRow}>
-              <label className={styles.inputLabel}>이름</label>
-              <input
+            <InputBox className={styles.inputRow}>
+              <Label className={styles.inputLabel}>이름</Label>
+              <Input
                 type="text"
                 name="name"
                 value={userDetails.name}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="이름 입력"
+                required={true}
               />
-            </div>
-            <div className={styles.inputRow}>
-              <label className={styles.inputLabel}>이메일</label>
-              <input
+            </InputBox>
+
+            <InputBox className={styles.inputRow}>
+              <Label className={styles.inputLabel}>이메일</Label>
+              <Input
                 type="email"
                 name="email"
                 value={userDetails.email}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="이메일 입력"
+                required={true}
               />
-            </div>
-            <div className={styles.inputRow}>
-              <label className={styles.inputLabel}>비밀번호</label>
-              <input
+            </InputBox>
+
+            <InputBox className={styles.inputRow}>
+              <Label className={styles.inputLabel}>비밀번호</Label>
+              <Input
                 type="password"
                 name="password"
                 value={userDetails.password}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="비밀번호 입력"
+                required={true}
               />
-            </div>
-            <div className={styles.inputRow}>
-              <label className={styles.inputLabel}>비밀번호 확인</label>
-              <input
+            </InputBox>
+
+            <InputBox className={styles.inputRow}>
+              <Label className={styles.inputLabel}>비밀번호 확인</Label>
+              <Input
                 type="password"
                 name="confirmPassword"
                 value={userDetails.confirmPassword}
                 onChange={handleInputChange}
                 className={styles.input}
                 placeholder="비밀번호 확인"
+                required={true}
               />
-            </div>
+            </InputBox>
           </div>
-          <button onClick={handleSignup} className={styles.signupButton}>
-            회원가입
-          </button>
-        </div>
-        <div className={styles.rightSection}>
-          <img
-            src="../../../public/image/computerImage.png"
-            className={styles.image}
-            alt="Computer"
+          <NavigateButtons
+            label="회원가입"
+            onClick={() => handleSignup}
+            className={styles.signupButton}
           />
-          <button onClick={navigateToLogin} className={styles.loginButton}>
-            로그인
-          </button>
+        </form>
+        <div className={styles.rightSection}>
+          <img src={computerImg} className={styles.image} alt="Computer" />
+          <NavigateButtons
+            label="로그인"
+            onClick={navigateToLogin}
+            className={styles.loginButton}
+          />
         </div>
       </div>
-      <footer className={styles.footer}>
-        © 2024 E-Office. All Rights Reserved.
-      </footer>
     </div>
   );
 }

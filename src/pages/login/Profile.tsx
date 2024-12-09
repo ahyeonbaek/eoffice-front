@@ -2,6 +2,12 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import styles from '../../css/loginStyles/Profile.module.css';
 import Sidebar from '../../components/sidebar/Siderbar';
+import Input from '../../components/input/Input';
+import InputBox from '../../components/input/InputBox';
+import Label from '../../components/input/Label';
+import defaultImage from '../../../public/img/default-image.png';
+import { NavigateButtons } from '../../components/button/Button';
+
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,14 +19,15 @@ import { useNavigate } from 'react-router-dom';
 const EditProfile = () => {
   const navigator = useNavigate();
 
-  const token = localStorage.getItem('token') ?? '';
+  const token = localStorage.getItem('token');
 
   const [passwords, setPassword] = useState({
+    //사용자가
     password: '',
     passwordComfirmed: '',
   });
 
-  const [loadProfileImage, setLoadProfileImage] = useState<string>();
+  const [loadProfileImage, setLoadProfileImage] = useState<string>(); //맨 처음 이미지
   const [inputFile, setInputFile] = useState<File>();
   const [srcUrl, setSrcUrl] = useState<string>();
 
@@ -48,20 +55,17 @@ const EditProfile = () => {
 
     if (passwords.password === '' || passwords.passwordComfirmed === '') {
       alert('비밀번호를 입력해주세요.');
-      return;
     } else if (passwords.password !== passwords.passwordComfirmed) {
       alert('비밀번호가 일치하지 않습니다.');
-      return;
     } else if (!inputFile) {
       alert('사진을 넣어주세요');
-      return;
     } else {
       formData.append('password', passwords.password);
       formData.append('profileImage', inputFile);
 
       try {
         const editProfileRequest = await fetch('/api/user/update', {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -69,15 +73,13 @@ const EditProfile = () => {
         });
 
         if (editProfileRequest.status === 200) {
-          const { isError, user } = await editProfileRequest.json();
+          const { isError, message } = await editProfileRequest.json();
 
-          if (!isError && user) {
-            const { profileImage } = user;
-
-            setLoadProfileImage(profileImage);
+          if (!isError) {
+            alert(message);
+            navigator('/home');
           } else {
             alert('일치하는 유저가 없습니다.');
-            return;
           }
         } else if (editProfileRequest.status === 401) {
           const { isError, message } = await editProfileRequest.json();
@@ -85,16 +87,12 @@ const EditProfile = () => {
           if (!isError) {
             alert(`${message}`);
             localStorage.removeItem('token');
-            navigator('/Login');
+            navigator('/login');
             return;
           }
         } else if (editProfileRequest.status === 400) {
-          const { isError, message } = await editProfileRequest.json();
-
-          if (isError) {
-            alert(`${message}`);
-            return;
-          }
+          const { message } = await editProfileRequest.json();
+          alert(`${message}`);
         } else if (editProfileRequest.status === 500) {
           const { isError, message } = await editProfileRequest.json();
 
@@ -116,8 +114,7 @@ const EditProfile = () => {
   // 로컬 스토리지
   const getProfileFetch = async () => {
     try {
-      const LoadProfileRequest = await fetch('/api/user/update', {
-        method: 'POST',
+      const LoadProfileRequest = await fetch('/api/user/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -131,17 +128,16 @@ const EditProfile = () => {
 
           if (!isError && user) {
             const { profileImage } = user;
-
-            setLoadProfileImage(profileImage);
+            setLoadProfileImage(profileImage); //데이터 처음에 받은것을 image를 state에 넣어줌
           }
         }
       } else if (LoadProfileRequest.status === 401) {
         const { isError, message } = await LoadProfileRequest.json();
 
-        if (!isError) {
+        if (isError) {
           alert(`${message}`);
           localStorage.removeItem('token');
-          navigator('/Login');
+          navigator('/login');
           return;
         }
       } else if (LoadProfileRequest.status === 400) {
@@ -160,7 +156,6 @@ const EditProfile = () => {
         }
       } else {
         alert('서버와 통신을 실패했습니다. 다시 시도해주세요.');
-        return;
       }
     } catch (err) {
       alert('시스템 에러 발생!');
@@ -169,69 +164,70 @@ const EditProfile = () => {
   };
   useEffect(() => {
     getProfileFetch();
-  }, []);
+  }, []); //
 
   return (
     <>
       <div className={styles.container}>
+        <Header />
         <Sidebar />
 
         <div className={styles.main_container}>
-          <Header />
           <main className={styles.main}>
             <div className={styles.main_content}>
-              <div className={styles.default_image}>
-                <label htmlFor="profileImage">
+              <InputBox className={styles.default_image}>
+                <Label htmlFor={'profileImage'}>
                   <img
                     className={styles.logo_image}
                     src={
                       srcUrl || loadProfileImage
                         ? srcUrl || loadProfileImage
-                        : '../../../public/images/default-image.png'
+                        : defaultImage
                     }
                   />
-                </label>
-                <input
+                </Label>
+                <Input
                   className={styles.input_file}
-                  type="file"
-                  name="profileImage"
-                  id="profileImage"
+                  type={'file'}
+                  name={'profileImage'}
+                  id={'profileImage'}
                   onChange={handleInputFile}
                 />
-              </div>
+              </InputBox>
 
               <div className={styles.inputs_wrap}>
-                <div className={styles.input_wrap}>
-                  <label className={styles.label} htmlFor="password">
+                <InputBox className={styles.input_wrap}>
+                  <Label className={styles.label} htmlFor={'password'}>
                     비밀번호
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     className={styles.input}
-                    type="text"
-                    id="password"
-                    name="password"
+                    type={'password'}
+                    id={'password'}
+                    name={'password'}
                     onChange={handlePasswordOnChange}
                   />
-                </div>
+                </InputBox>
 
-                <div className={styles.input_wrap}>
-                  <label className={styles.label} htmlFor="passwordComfirmed">
+                <InputBox className={styles.input_wrap}>
+                  <Label className={styles.label} htmlFor={'passwordComfirmed'}>
                     비밀번호 확인
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     className={styles.input}
-                    type="text"
-                    id="passwordComfirmed"
-                    name="passwordComfirmed"
+                    type={'password'}
+                    id={'passwordComfirmed'}
+                    name={'passwordComfirmed'}
                     onChange={handlePasswordOnChange}
                   />
-                </div>
-                {/* {JSON.stringify(passwords)} */}
+                </InputBox>
               </div>
 
-              <button className={styles.button} onClick={handleOnSubmit}>
-                프로필 수정
-              </button>
+              <NavigateButtons
+                className={`${styles.button} ${styles.cursor_pointer}`}
+                label={'프로필 수정'}
+                onClick={handleOnSubmit}
+              ></NavigateButtons>
             </div>
           </main>
           <Footer />

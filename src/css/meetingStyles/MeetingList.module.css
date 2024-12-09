@@ -1,0 +1,43 @@
+.card_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  margin-top: 150px;
+  margin-bottom: 200px;
+  padding-left: 200px;
+}
+
+.card {
+  padding: 20px;
+  border: solid black;
+  border-radius: 50px;
+  background-color: #f5efff;
+  width: 250px;
+  height: 300px;
+}
+
+.card_img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.post_title_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 50px;
+}
+
+.post_name {
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}

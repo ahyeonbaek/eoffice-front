@@ -1,12 +1,20 @@
-import { ChangeEvent } from 'react';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Siderbar';
 import styles from '../../css/meetingStyles/CreateMinutes.module.css';
+import Input from '../../components/input/Input';
+import Label from '../../components/input/Label';
+import InputBox from '../../components/input/InputBox';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { NavigateButtons } from '../../components/button/Button';
 
 const CreateMinutes = () => {
+  const navigator = useNavigate();
+
+  const token = localStorage.getItem('token');
+
   const [meetingInput, setMeetingInput] = useState({
     meetingTitle: '',
     meetingDate: '',
@@ -32,23 +40,20 @@ const CreateMinutes = () => {
 
   const handleSubmitMeetingData = async () => {
     if (meetingInput.meetingTitle === '') {
-      alert('회의제목을 입력해주세요.');
-      return;
+      alert('회의 제목을 입력해주세요.');
     } else if (meetingInput.meetingDate === '') {
       alert('일시를 입력해주세요.');
-      return;
-    } else if (meetingInput.meetingAttendee === null) {
+    } else if (meetingInput.meetingAttendee <= 0) {
       alert('참가자 수를 입력해주세요.');
-      return;
     } else if (meetingInput.meetingContent === '') {
-      alert('회의내용을 입력해주세요.');
-      return;
+      alert('회의 내용을 입력해주세요.');
     } else {
       try {
         const meetingDataRequest = await fetch('/api/meeting/minutes', {
           method: 'POST',
           headers: {
             'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             title: meetingInput.meetingTitle,
@@ -58,12 +63,10 @@ const CreateMinutes = () => {
           }),
         });
 
-        if (meetingDataRequest) {
-          const meetingData = await meetingDataRequest.json();
-
-          if (meetingData) {
-            console.log(meetingData);
-          }
+        if (meetingDataRequest.status === 201) {
+          const { message } = await meetingDataRequest.json();
+          alert(`${message}`);
+          navigator('/minuteslist');
         } else {
           alert('등록 요청에 실패했습니다. 다시 시도해주세요.');
           return;
@@ -76,54 +79,54 @@ const CreateMinutes = () => {
   };
 
   return (
-    <>
       <div className={styles.container}>
+        <Header />
         <Sidebar />
-
         <div className={styles.main_container}>
-          <Header />
           <main className={styles.main}>
             <div className={styles.main_content}>
               <div className={styles.inputs_wrap}>
-                <div className={styles.input_wrap}>
-                  <label className={styles.label} htmlFor="meetingTitle">
+                <InputBox className={styles.input_wrap}>
+                  <Label className={styles.label} htmlFor={'meetingTitle'}>
                     회의제목
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     className={styles.input}
-                    type="text"
-                    id="meetingTitle"
-                    name="meetingTitle"
+                    type={'text'}
+                    id={'meetingTitle'}
+                    name={'meetingTitle'}
                     value={meetingInput.meetingTitle}
                     onChange={handleOnChangeInput}
                   />
-                </div>
-                <div className={styles.input_wrap}>
-                  <label className={styles.label} htmlFor="meetingDate">
+                </InputBox>
+
+                <InputBox className={styles.input_wrap}>
+                  <Label className={styles.label} htmlFor={'meetingDate'}>
                     일시
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     className={styles.input}
-                    type="date"
-                    id="meetingDate"
-                    name="meetingDate"
+                    type={'date'}
+                    id={'meetingDate'}
+                    name={'meetingDate'}
                     value={meetingInput.meetingDate}
                     onChange={handleOnChangeInput}
                   />
-                </div>
-                <div className={styles.input_wrap}>
-                  <label className={styles.label} htmlFor="meetingAttendee">
-                    참여자
-                  </label>
-                  <input
+                </InputBox>
+
+                <InputBox className={styles.input_wrap}>
+                  <Label className={styles.label} htmlFor={'meetingAttendee'}>
+                    인원
+                  </Label>
+                  <Input
                     className={styles.input}
-                    type="number"
-                    id="meetingAttendee"
-                    name="meetingAttendee"
+                    type={'number'}
+                    id={'meetingAttendee'}
+                    name={'meetingAttendee'}
                     value={meetingInput.meetingAttendee}
                     onChange={handleOnChangeInput}
                   />
-                </div>
+                </InputBox>
 
                 <div className={styles.input_wrap}>
                   <label className={styles.label} htmlFor="meetingContent">
@@ -139,21 +142,16 @@ const CreateMinutes = () => {
                   ></textarea>
                 </div>
               </div>
-
-              {JSON.stringify(meetingInput)}
-
-              <button
+              <NavigateButtons
+                label={'작성완료'}
                 className={styles.button}
                 onClick={handleSubmitMeetingData}
-              >
-                작성완료
-              </button>
+              ></NavigateButtons>
             </div>
           </main>
           <Footer />
         </div>
       </div>
-    </>
   );
 };
 

@@ -1,0 +1,72 @@
+.total_box{
+  box-shadow: 10px 10px 10px 10px #cdcdcd;
+  height: 600px;
+}
+
+.meetingroom_title {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.meetingroome_name_value {
+  margin-left: 200px;
+}
+
+.editmeeting_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  margin-left: 100px;
+  gap: 50px;
+}
+
+.addmeeting_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  box-shadow: 10px 10px 10px 10px #cdcdcd;
+  margin-left: 100px;
+  margin-top: 150px;
+  gap: 50px;
+}
+
+.inputBox_box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.inputBox {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.input {
+  border: none;
+  background-color: #f1f1f1;
+  height: 40px;
+  width: 280px;
+}
+
+.editmeeting_buttons_box {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+.h1 {
+  margin-left: 20px;
+
+}
+
+.label{
+  font-size: 20px;
+  font-weight: bold;
+}

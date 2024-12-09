@@ -1,0 +1,105 @@
+.meetingroom_box{
+  box-shadow: 10px 10px 10px 10px #cdcdcd;
+  height: 600px;
+}
+
+.meetingroom_title {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+  padding: 20px;
+}
+
+.meetingroome_name_value {
+  margin-left: 200px;
+  background-color: #ead1fc;
+  padding: 0 10px ;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.reservemeeting_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  margin-left: 100px;
+  gap: 50px;
+}
+
+.reservemeeting_buttons_box {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+.inputBox_box {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.input_group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.label {
+  text-align: right;
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.input {
+  border: none;
+  background-color: #f1f1f1;
+  height: 40px;
+  width: 280px;
+}
+
+/* .reserve_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    height: 80vh;
+}
+
+.reserve_left_box{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+}
+
+.reserve_title{
+    display: flex;
+    justify-content: center;
+}
+
+.reserve_total{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input_group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.input_group label{
+    text-align: right;
+    margin-right: 10px;
+} */
