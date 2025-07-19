@@ -17,17 +17,17 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
 
   useEffect(() => {
     if (initialImage) {
-      // 서버에 저장된 사용자의 이미지(회의실등록할 때)가 있을때
+
       setUploadedSrc(initialImage);
     }
   }, [initialImage]);
 
   const handleChangeImg = (e: ChangeEvent<HTMLInputElement>) => {
-    // 새로운 이미지를 업로드했을 때
+
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setUploadImg(file); // 현재 타입은 File
-      const previewUrl = URL.createObjectURL(file); //이미지 경로로 바꿔서 보여줘야함
+      setUploadImg(file); 
+      const previewUrl = URL.createObjectURL(file); 
       setUploadedSrc(previewUrl);
     }
   };
